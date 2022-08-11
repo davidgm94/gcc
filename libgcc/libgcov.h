@@ -194,6 +194,7 @@ extern struct gcov_info *gcov_list;
 #endif
 
 #include "gcov-io.h"
+#include <stdint.h>
 
 /* Structures embedded in coveraged program.  The structures generated
    by write_profile must match these.  */

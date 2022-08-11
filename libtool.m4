@@ -2491,6 +2491,16 @@ linux* | k*bsd*-gnu | kopensolaris*-gnu | gnu* | uclinuxfdpiceabi)
   dynamic_linker='GNU/Linux ld.so'
   ;;
 
+rnu*)
+  version_type=linux
+  need_lib_prefix=no
+  need_version=no
+  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}${major} ${libname}${shared_ext}'
+  soname_spec='${libname}${release}${shared_ext}$major'
+  shlibpath_var=LD_LIBRARY_PATH
+  hardcode_into_libs=yes
+  ;;
+
 netbsd*)
   version_type=sunos
   need_lib_prefix=no
@@ -3096,6 +3106,10 @@ netbsd*)
   else
     lt_cv_deplibs_check_method='match_pattern /lib[[^/]]+(\.so|_pic\.a)$'
   fi
+  ;;
+
+rnu*)
+  lt_cv_deplibs_check_method=pass_all
   ;;
 
 newos6*)

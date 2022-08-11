@@ -26,15 +26,16 @@
  *  This is a Standard C++ Library header.
  */
 
-#ifndef _GLIBCXX_FENV_H
-#define _GLIBCXX_FENV_H 1
-
-#pragma GCC system_header
 
 #include <bits/c++config.h>
 #if _GLIBCXX_HAVE_FENV_H
 # include_next <fenv.h>
 #endif
+
+#ifndef _GLIBCXX_FENV_H
+#define _GLIBCXX_FENV_H 1
+
+#pragma GCC system_header
 
 #if __cplusplus >= 201103L
 

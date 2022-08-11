@@ -673,6 +673,25 @@ x86_cpus="generic intel"
 
 # Common parts for widely ported systems.
 case ${target} in
+*-*-rnu*)
+  extra_options="$extra_options gnu-user.opt"
+  gas=yes
+  gnu_ld=yes
+  default_use_cxa_atexit=yes
+  use_gcc_stdint=wrap
+
+  case ${target} in
+  *-rnu-system*)
+    tmake_file="${tmake_file} t-slibgcc"
+    thread_file='posix'
+    ;;
+  *-rnu-kernel*)
+    ;;
+  *)
+    echo "RNU target '${target}' not supported."
+    exit 1
+  esac
+  ;;
 *-*-darwin*)
   tmake_file="t-darwin "
   tm_file="${tm_file} darwin.h"
@@ -2005,6 +2024,24 @@ i[34567]86-*-linux* | i[34567]86-*-kfreebsd*-gnu | i[34567]86-*-gnu* | i[34567]8
 		tm_file="$tm_file i386/gnu-user-common.h i386/gnu-user.h gnu.h i386/gnu.h"
 		;;
 	esac
+	;;
+x86_64-*-rnu*)
+	tm_file="${tm_file} i386/unix.h i386/att.h dbxelf.h elfos.h gnu-user.h glibc-stdint.h \
+		 i386/x86-64.h i386/gnu-user-common.h i386/gnu-user64.h rnu.h i386/i386-rnu.h"
+
+	case ${target} in
+	*-rnu-system*)
+		tm_file="${tm_file} rnu-system.h"
+		;;
+	*-rnu-kernel*)
+		tm_file="${tm_file} rnu-kernel.h"
+		;;
+	*)
+		echo "RNU target '${target}' not supported."
+		exit 1
+	esac
+
+	tmake_file="${tmake_file} i386/t-rnu64"
 	;;
 x86_64-*-linux* | x86_64-*-kfreebsd*-gnu)
 	tm_file="${tm_file} i386/unix.h i386/att.h dbxelf.h elfos.h gnu-user.h glibc-stdint.h \

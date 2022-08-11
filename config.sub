@@ -143,7 +143,7 @@ case $1 in
 		maybe_os=$field2-$field3
 		case $maybe_os in
 			nto-qnx* | linux-* | uclinux-uclibc* \
-			| uclinux-gnu* | kfreebsd*-gnu* | knetbsd*-gnu* | netbsd*-gnu* \
+			| uclinux-gnu* | rnu-kernel* | rnu-system* | kfreebsd*-gnu* | knetbsd*-gnu* | netbsd*-gnu* \
 			| netbsd*-eabi* | kopensolaris*-gnu* | cloudabi*-eabi* \
 			| storm-chaos* | os2-emx* | rtmk-nova*)
 				basic_machine=$field1
@@ -1311,6 +1311,10 @@ case $basic_os in
 		kernel=linux
 		os=`echo "$basic_os" | sed -e 's|gnu/linux|gnu|'`
 		;;
+	rnu*)
+		kernel=rnu
+		os=`echo "$basic_os" | sed -e 's|rnu|system|'`
+		;;
 	os2-emx)
 		kernel=os2
 		os=`echo "$basic_os" | sed -e 's|os2-emx|emx|'`
@@ -1749,7 +1753,7 @@ case $os in
 	     | onefs* | tirtos* | phoenix* | fuchsia* | redox* | bme* \
 	     | midnightbsd* | amdhsa* | unleashed* | emscripten* | wasi* \
 	     | nsk* | powerunix* | genode* | zvmoe* | qnx* | emx* | zephyr* \
-	     | fiwix* )
+	     | fiwix* | kernel* | system* | rnu*)
 		;;
 	# This one is extra strict with allowed versions
 	sco3.2v2 | sco3.2v[4-9]* | sco5v6*)
@@ -1768,6 +1772,8 @@ esac
 case $kernel-$os in
 	linux-gnu* | linux-dietlibc* | linux-android* | linux-newlib* \
 		   | linux-musl* | linux-relibc* | linux-uclibc* )
+		;;
+	rnu-kernel* | rnu-system* )
 		;;
 	uclinux-uclibc* )
 		;;
